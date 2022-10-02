@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnNext(View view) {
         Intent intent1 = new Intent(MainActivity.this, MainActivity2.class);
-        startActivityForResult(intent1, 1);
+        startActivityForResult(intent1, 6);
+
     }
 }
