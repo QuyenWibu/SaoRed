@@ -82,29 +82,26 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-            String t = getIntent().getStringExtra("t1" );
-            b1.setText(t);
-
             String s = stringBuilder.toString();
             String[] string = s.split(" ");
             for (int i=0;i<string.length;i++){
                 if(i==0){
-                    b1.setText(string[0], TextView.BufferType.EDITABLE);
+                    b1.setText(string[0]);
                 }
                 else if(i==1){
-                    b2.setText(string[1], TextView.BufferType.EDITABLE);
+                    b2.setText(string[1]);
                 }
                 else if(i==2){
-                    b3.setText(string[2], TextView.BufferType.EDITABLE);
+                    b3.setText(string[2]);
                 }
                 else if(i==3){
-                    b4.setText(string[3], TextView.BufferType.EDITABLE);
+                    b4.setText(string[3]);
                 }
                 else if(i==4){
-                    b5.setText(string[4], TextView.BufferType.EDITABLE);
+                    b5.setText(string[4]);
                 }
                 else if(i==5){
-                    b6.setText(string[5], TextView.BufferType.EDITABLE);
+                    b6.setText(string[5]);
                 }
             }
         });
@@ -117,15 +114,18 @@ public class MainActivity extends AppCompatActivity {
         //lấy hình ảnh từ máy ảnh
 
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-            if(resultCode == RESULT_OK){
-                String result = data.getStringExtra("t1");
-                b1.setText(result);
-            }
-            if(resultCode == RESULT_CANCELED){
-                b1.setText("0");
-            }
-        }
+        String result1 = data.getStringExtra("t1");
+        b1.setText(result1);
+        String result2 = data.getStringExtra("t2");
+        b2.setText(result2);
+        String result3 = data.getStringExtra("t3");
+        b3.setText(result3);
+        String result4 = data.getStringExtra("t4");
+        b4.setText(result4);
+        String result5 = data.getStringExtra("t5");
+        b5.setText(result5);
+        String result6 = data.getStringExtra("t6");
+        b6.setText(result6);
         if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == RESULT_OK) {

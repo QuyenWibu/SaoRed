@@ -38,11 +38,30 @@ public class MainActivity2 extends AppCompatActivity {
 //    }
 
     public void btnBack(View view) {
-        Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-        String text = B1.getText().toString();
-        intent.putExtra("t1", text);
-        setResult(RESULT_OK, intent);
+        Intent intent1 = new Intent();
+        Intent intent2 = new Intent();
+        Intent intent3 = new Intent();
+        Intent intent4 = new Intent();
+        Intent intent5 = new Intent();
+        Intent intent6 = new Intent();
+        String text1 = B1.getText().toString();
+        String text2 = B2.getText().toString();
+        String text3 = B3.getText().toString();
+        String text4 = B4.getText().toString();
+        String text5 = B5.getText().toString();
+        String text6 = B6.getText().toString();
+        intent1.putExtra("t1", text1);
+        intent2.putExtra("t2", text2);
+        intent3.putExtra("t3", text3);
+        intent4.putExtra("t4", text4);
+        intent5.putExtra("t5", text5);
+        intent6.putExtra("t6", text6);
+        setResult(1, intent1);
+        setResult(2, intent2);
+        setResult(3, intent3);
+        setResult(4, intent4);
+        setResult(5, intent5);
+        setResult(6, intent6);
         finish();
-        startActivity(intent);
     }
 }
