@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_data;
     private static final int REQUEST_CAMERA_CODE = 101;
     Bitmap bitmap;
-    EditText b1, b2, b3, b4, b5, b6;
-
+    TextView b1, b2, b3, b4, b5, b6;
+    Button btn;
 
 
     @Override
@@ -47,16 +47,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btn = findViewById(R.id.btn);
         btn_capture = findViewById(R.id.button_capture);
         btn_copy = findViewById(R.id.button_copy);
         tv_data = findViewById(R.id.text_data);
 
-        b1 = (EditText) findViewById(R.id.bang1);
-        b2 = (EditText) findViewById(R.id.bang2);
-        b3 = (EditText) findViewById(R.id.bang3);
-        b4 = (EditText) findViewById(R.id.bang4);
-        b5 = (EditText) findViewById(R.id.bang5);
-        b6 = (EditText) findViewById(R.id.bang6);
+        b1 = (TextView) findViewById(R.id.bang1);
+        b2 = (TextView) findViewById(R.id.bang2);
+        b3 = (TextView) findViewById(R.id.bang3);
+        b4 = (TextView) findViewById(R.id.bang4);
+        b5 = (TextView) findViewById(R.id.bang5);
+        b6 = (TextView) findViewById(R.id.bang6);
 
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission.CAMERA }, REQUEST_CAMERA_CODE);
@@ -66,14 +67,65 @@ public class MainActivity extends AppCompatActivity {
         btn_copy.setOnClickListener(view -> {
             String scanned_text = tv_data.getText().toString();
             MainActivity.this.copyToClickBoard(scanned_text);
+
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+//                intent.putExtra()
+//            }
+//        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
+            String t = getIntent().getStringExtra("t1" );
+            b1.setText(t);
+
+            String s = stringBuilder.toString();
+            String[] string = s.split(" ");
+            for (int i=0;i<string.length;i++){
+                if(i==0){
+                    b1.setText(string[0], TextView.BufferType.EDITABLE);
+                }
+                else if(i==1){
+                    b2.setText(string[1], TextView.BufferType.EDITABLE);
+                }
+                else if(i==2){
+                    b3.setText(string[2], TextView.BufferType.EDITABLE);
+                }
+                else if(i==3){
+                    b4.setText(string[3], TextView.BufferType.EDITABLE);
+                }
+                else if(i==4){
+                    b5.setText(string[4], TextView.BufferType.EDITABLE);
+                }
+                else if(i==5){
+                    b6.setText(string[5], TextView.BufferType.EDITABLE);
+                }
+            }
         });
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //lấy hình ảnh từ máy ảnh
 
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("t1");
+                b1.setText(result);
+            }
+            if(resultCode == RESULT_CANCELED){
+                b1.setText("0");
+            }
+        }
         if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == RESULT_OK) {
@@ -107,65 +159,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void Themgiatri(StringBuilder stringBuilder){
-        String s = stringBuilder.toString();
-        String[] string = s.split(" ");
-        for (int i=0;i<string.length;i++){
-            if(i==0){
-                if(string[i].isEmpty()){
-                    b1.setText("0", TextView.BufferType.EDITABLE);
-                }
-                else{
-                    b1.setText(string[0], TextView.BufferType.EDITABLE);
-                }
-            }
-            else if(i==1){
-                if(string[i].isEmpty()){
-                    b2.setText("0", TextView.BufferType.EDITABLE);
-                }
-                else{
-                    b2.setText(string[1], TextView.BufferType.EDITABLE);
-                }
-            }
-            else if(i==2){
-                if(string[i].isEmpty()){
-                    b3.setText("0", TextView.BufferType.EDITABLE);
-                }
-                else{
-                    b3.setText(string[2], TextView.BufferType.EDITABLE);
-                }
-            }
-            else if(i==3){
-                if(string[i].isEmpty()){
-                    b4.setText("0", TextView.BufferType.EDITABLE);
-                }
-                else{
-                    b4.setText(string[3], TextView.BufferType.EDITABLE);
-                }
-            }
-            else if(i==4){
-                if(string[i].isEmpty()){
-                    b5.setText("0", TextView.BufferType.EDITABLE);
-                }
-                else{
-                    b5.setText(string[4], TextView.BufferType.EDITABLE);
-                }
-            }
-            else if(i==5){
-                if(string[i].isEmpty()){
-                    b6.setText("0", TextView.BufferType.EDITABLE);
-                }
-                else{
-                    b6.setText(string[5], TextView.BufferType.EDITABLE);
-                }
-            }
-        }
-    }
+//    public void Themgiatri(StringBuilder stringBuilder){
+//        String s = stringBuilder.toString();
+//        String[] string = s.split(" ");
+//        for (int i=0;i<string.length;i++){
+//            if(i==0){
+//                    b1.setText(string[0], TextView.BufferType.EDITABLE);
+//            }
+//            else if(i==1){
+//                    b2.setText(string[1], TextView.BufferType.EDITABLE);
+//            }
+//            else if(i==2){
+//                    b3.setText(string[2], TextView.BufferType.EDITABLE);
+//            }
+//            else if(i==3){
+//                    b4.setText(string[3], TextView.BufferType.EDITABLE);
+//            }
+//            else if(i==4){
+//                    b5.setText(string[4], TextView.BufferType.EDITABLE);
+//            }
+//            else if(i==5){
+//                    b6.setText(string[5], TextView.BufferType.EDITABLE);
+//            }
+//        }
+//    }
 
     private void copyToClickBoard(String text){
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("Copied data", text);
         clipboard.setPrimaryClip(clip);
         Toast.makeText(MainActivity.this, "Copied to clipboard!", Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void btnNext(View view) {
+        Intent intent1 = new Intent(MainActivity.this, MainActivity2.class);
+        startActivityForResult(intent1, 1);
     }
 }
