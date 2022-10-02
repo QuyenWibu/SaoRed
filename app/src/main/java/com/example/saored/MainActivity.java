@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
         btn_copy = findViewById(R.id.button_copy);
         tv_data = findViewById(R.id.text_data);
 
-        b1 = findViewById(R.id.bang1);
-        b2 = findViewById(R.id.bang2);
-        b3 = findViewById(R.id.bang3);
-        b4 = findViewById(R.id.bang4);
-        b5 = findViewById(R.id.bang5);
-        b6 = findViewById(R.id.bang6);
+        b1 = (EditText) findViewById(R.id.bang1);
+        b2 = (EditText) findViewById(R.id.bang2);
+        b3 = (EditText) findViewById(R.id.bang3);
+        b4 = (EditText) findViewById(R.id.bang4);
+        b5 = (EditText) findViewById(R.id.bang5);
+        b6 = (EditText) findViewById(R.id.bang6);
 
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{ Manifest.permission.CAMERA }, REQUEST_CAMERA_CODE);
@@ -67,14 +67,6 @@ public class MainActivity extends AppCompatActivity {
             String scanned_text = tv_data.getText().toString();
             MainActivity.this.copyToClickBoard(scanned_text);
         });
-//        String s = stringBuilder.toString();
-//        String[] string = s.split(" ");
-//            b1.setText(string[0]);
-//            b2.setText(string[1]);
-//            b3.setText(string[2]);
-//            b4.setText(string[3]);
-//            b5.setText(string[4]);
-//            b6.setText(string[5]);
     }
 
     @Override
@@ -115,6 +107,60 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void Themgiatri(StringBuilder stringBuilder){
+        String s = stringBuilder.toString();
+        String[] string = s.split(" ");
+        for (int i=0;i<string.length;i++){
+            if(i==0){
+                if(string[i].isEmpty()){
+                    b1.setText("0", TextView.BufferType.EDITABLE);
+                }
+                else{
+                    b1.setText(string[0], TextView.BufferType.EDITABLE);
+                }
+            }
+            else if(i==1){
+                if(string[i].isEmpty()){
+                    b2.setText("0", TextView.BufferType.EDITABLE);
+                }
+                else{
+                    b2.setText(string[1], TextView.BufferType.EDITABLE);
+                }
+            }
+            else if(i==2){
+                if(string[i].isEmpty()){
+                    b3.setText("0", TextView.BufferType.EDITABLE);
+                }
+                else{
+                    b3.setText(string[2], TextView.BufferType.EDITABLE);
+                }
+            }
+            else if(i==3){
+                if(string[i].isEmpty()){
+                    b4.setText("0", TextView.BufferType.EDITABLE);
+                }
+                else{
+                    b4.setText(string[3], TextView.BufferType.EDITABLE);
+                }
+            }
+            else if(i==4){
+                if(string[i].isEmpty()){
+                    b5.setText("0", TextView.BufferType.EDITABLE);
+                }
+                else{
+                    b5.setText(string[4], TextView.BufferType.EDITABLE);
+                }
+            }
+            else if(i==5){
+                if(string[i].isEmpty()){
+                    b6.setText("0", TextView.BufferType.EDITABLE);
+                }
+                else{
+                    b6.setText(string[5], TextView.BufferType.EDITABLE);
+                }
+            }
+        }
+    }
 
     private void copyToClickBoard(String text){
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
