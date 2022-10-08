@@ -1,5 +1,6 @@
 package com.example.saored;
 
+import java.util.Arrays;
 import android.Manifest;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -82,28 +83,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-            String s = stringBuilder.toString();
-            String[] string = s.split(" ");
-            for (int i=0;i<string.length;i++){
-                if(i==0){
-                    b1.setText(string[0]);
-                }
-                else if(i==1){
-                    b2.setText(string[1]);
-                }
-                else if(i==2){
-                    b3.setText(string[2]);
-                }
-                else if(i==3){
-                    b4.setText(string[3]);
-                }
-                else if(i==4){
-                    b5.setText(string[4]);
-                }
-                else if(i==5){
-                    b6.setText(string[5]);
-                }
-            }
         });
     }
 
@@ -111,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        //lấy hình ảnh từ máy ảnh
-
         super.onActivityResult(requestCode, resultCode, data);
         String result1 = data.getStringExtra("t1");
         b1.setText(result1);
@@ -126,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         b5.setText(result5);
         String result6 = data.getStringExtra("t6");
         b6.setText(result6);
+        //lấy hình ảnh từ máy ảnh
         if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == RESULT_OK) {
@@ -152,6 +130,53 @@ public class MainActivity extends AppCompatActivity {
             for(int i=0;i<textBlockSparseArray.size();i++){
                 TextBlock textBlock = textBlockSparseArray.valueAt(i);
                 stringBuilder.append(textBlock.getValue());
+            }
+            String s = stringBuilder.toString();
+            String luuketquadatach="";
+            char[] chars = s.toCharArray();
+            for(int i=0;i<chars.length;i++){
+                    if(chars[i]=='1' && chars[i+1]=='0'){
+                        luuketquadatach = luuketquadatach + "10 ";
+                        i++;
+                    }
+                    else if(chars[i]!=' '){
+                        luuketquadatach = luuketquadatach + chars[i] + " ";
+                    }
+            }
+            String[] stg = luuketquadatach.split(" ");
+//                int ib1 = Integer.parseInt(string[i]);
+//                if(ib1>10){
+//
+////                    int phepnhan = 1;
+////                    int sizee = dodaiphantu.length();
+////                    for(int j=0;j<sizee-1;j++){
+////                        phepnhan*=10;
+////                    }
+////                    int ketqua = ib1/phepnhan;
+////                    int ketquadu = ib1%phepnhan;
+////                    String sodu = String.valueOf(ketquadu);
+////                    string[i] = ketqua + " " + ketquadu + " ";
+//
+//                }
+            for (int i=0;i<stg.length;i++){
+                if(i==0){
+                        b1.setText(stg[0]);
+                }
+                else if(i==1){
+                    b2.setText(stg[1]);
+                }
+                else if(i==2){
+                    b3.setText(stg[2]);
+                }
+                else if(i==3){
+                    b4.setText(stg[3]);
+                }
+                else if(i==4){
+                    b5.setText(stg[4]);
+                }
+                else if(i==5){
+                    b6.setText(stg[5]);
+                }
             }
             tv_data.setText(stringBuilder.toString());
             btn_capture.setText("Retake");
